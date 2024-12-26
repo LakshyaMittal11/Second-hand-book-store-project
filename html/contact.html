@@ -26,16 +26,18 @@
     <form class="contact-form" action="Contactprocess" method="post">
       <h2>Contact Us</h2>
       <p>If you have any questions or would like to know more about our collection, please get in touch with us using the form below.</p>
+      <label for="name" >Name:</label>
+      <input type="text" name="N" id="name" placeholder="Enter your name" required>
       <label for="email" >Email:</label>
       <input type="text" name="E" id="email" placeholder="Enter your email" required>
 
       <label for="phone">Phone Number:</label>
       <input type="text" name="P" id="phone" placeholder="Enter your phone number" required>
 
-      <label for="address">Address:</label>
-      <textarea id="address" type="text" name="A" placeholder="Enter your address" rows="3"></textarea>
+      <label for="message">Message:</label>
+      <textarea id="address" type="text" name="M" placeholder="Enter your message" rows="3"></textarea>
 
-      <button type="submit" name="S">Submit</button>
+      <button type="submit" name="S">Send</button>
     </form>
   </div>
 
