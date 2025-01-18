@@ -1,8 +1,13 @@
 var express=require('express');
 var app=express();
+const multer = require('multer');
 app.use(express.static("bookshop"));
 app.use(express.static("bookshop/css"));
 app.use(express.static("bookshop/html"));
+app.use(express.static("bookshop/uploads"));
+
+app.set('view engine','ejs');
+
 
 /* create database for stablish connection*/
 var my=require("mysql");
@@ -53,8 +58,26 @@ app.get("/Register",function(req,res)
 res.sendFile("./bookshop/html/register.html",{root:__dirname});
 });
 
+app.get("/admin",function(req,res)
+{
+res.sendFile("./bookshop/html/adminlogin.html",{root:__dirname});
+});
+
+app.get("/forgot",function(req,res)
+{
+res.sendFile("./bookshop/html/forgot.html",{root:__dirname});
+});
+
+app.get("/addbook",function(req,res)
+{
+res.sendFile("./bookshop/html/addbook.html",{root:__dirname});
+});
+
+
 var bd=require('body-parser');
 var ed=bd.urlencoded({extended:false}) 
+
+/*------------------------contact-----------------------*/
 app.post("/Contactprocess",ed,function(req,res)
 {
     var d=req.body.N;
@@ -70,6 +93,7 @@ app.post("/Contactprocess",ed,function(req,res)
 });
 });
 
+/*-----------------------register------------------*/
 app.post("/regprocess",ed,function(req,res)
 {
     var a=req.body.N;
@@ -84,7 +108,7 @@ app.post("/regprocess",ed,function(req,res)
 
 });
 
-
+/*-----------------------------login-------------*/
 app.post("/loginprocess",ed,function(req,res){
 var a=req.body.E;
 var b=req.body.P;
@@ -99,16 +123,102 @@ con.query(q,function(err,result){
     if(L>0){
         var p=result[0].pwd;
         if(p==b)
-            res.send("valid user");
+            res.send("Login successfully");
         else
         res.send("Password is invalid");
     }
     else
     res.send("Email is invalid");
-});
-    
+});    
 });
 
+/*------------------------Adminlogin------------------*/
+app.post("/Aloginprocess",ed,function(req,res){
+    var a=req.body.E;
+    var b=req.body.P;
+    console.log(a);
+    console.log(b);
+    var q="select * from admin where email='"+a+"'";
+    con.query(q,function(err,result){
+        if(err)
+            throw err;
+        console.log(result);
+        var L=result.length;
+        if(L>0){
+            var p=result[0].pwd;
+            if(p==b)
+                res.render('ahome',{na:result[0].name});
+            else
+            res.send("Password is invalid");
+        }
+        else
+        res.send("Email is invalid");
+    });
+        
+    });
+/*--------------------viewusers----------------------*/
+
+    app.get("/viewusers",function(req,res)
+    {
+        var q="select * from users";
+        con.query(q,function(err,result){
+            if(err)
+                throw err;
+            res.render('viewusers',{data:result});
+        });
+    });
+    
+/*----------------------viewenquery---------------------*/
+    app.get("/vienq",function(req,res)
+    {
+        var q="select * from contact";
+        con.query(q,function(err,result){
+            if(err)
+                throw err;
+            res.render('vienq',{data:result});
+        });
+    });
+/*----------------------multer code---------------------*/
+    const st = multer.diskStorage({
+        destination: function (req, file, cb) {
+      
+          cb(null, 'bookshop/uploads/');
+        },
+        filename: function (req, file, cb) {
+          
+          cb(null, file.originalname);
+        }
+      });
+      
+      const upload = multer({ storage: st });
+/*----------------------addbooks---------------------*/
+    
+app.post("/addbookprocess",ed, upload.single('bookImage'),function(req,res)
+{
+
+    var a=req.body.bookId;
+    var b=req.body.bookName;
+    var c=req.body.price
+    var d=req.body.category
+    var e=req.body.description;
+    var f=req.file.filename;
+  var q="insert into book values('"+a+"','"+b+"',"+c+",'"+d+"','"+e+"','"+f+"')";
+ con.query(q,function(err,result){
+    if(err)
+        throw err;
+       res.redirect("vbooks");
+});
+});
+
+app.get("/vbooks",function(req,res)
+{
+    var q="select * from book";
+    con.query(q,function(err,result){
+        if(err)
+            throw err;
+        res.render('vbooks',{data:result});
+    });
+});
 
 app.listen(5000,function(req,res)
 {
