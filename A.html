@@ -1,0 +1,23 @@
+<head>
+<script>
+function show()
+{
+var count=0;
+function disp()
+{
+count++;
+return count;
+}
+return disp;
+}
+</script>
+</head>
+<body>
+<script>
+var start=show();
+alert(start());
+alert(start());
+alert(start());
+alert(start());
+</script>
+</body>
