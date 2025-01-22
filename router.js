@@ -1,12 +1,19 @@
 var express=require('express');
 var app=express();
 const multer = require('multer');
+const session = require("express-session");
 app.use(express.static("bookshop"));
 app.use(express.static("bookshop/css"));
 app.use(express.static("bookshop/html"));
 app.use(express.static("bookshop/uploads"));
 
 app.set('view engine','ejs');
+
+app.use(session({
+    secret: "y78887897",
+    saveUninitialized: true,
+    resave: true
+}));
 
 
 /* create database for stablish connection*/
@@ -23,7 +30,6 @@ con.connect(function(err){
     console.log("connect to mysql")
 });
 /*-------------------------------------*/
-
 
 
 app.get("/login",function(req,res)
@@ -76,6 +82,14 @@ res.sendFile("./bookshop/html/addbook.html",{root:__dirname});
 
 var bd=require('body-parser');
 var ed=bd.urlencoded({extended:false}) 
+
+app.use(function (req, res, next) {
+  res.locals.aname = req.session.aname;
+  next();
+});
+
+
+
 
 /*------------------------contact-----------------------*/
 app.post("/Contactprocess",ed,function(req,res)
@@ -147,8 +161,11 @@ app.post("/Aloginprocess",ed,function(req,res){
         if(L>0){
             var p=result[0].pwd;
             if(p==b)
-                res.render('ahome',{na:result[0].name});
-            else
+{
+req.session.aname=result[0].name;
+res.render('ahome',{na:result[0].name});
+ 
+}           else
             res.send("Password is invalid");
         }
         else
@@ -160,6 +177,8 @@ app.post("/Aloginprocess",ed,function(req,res){
 
     app.get("/viewusers",function(req,res)
     {
+if(req.session.aname==null)
+res.redirect("/admin");
         var q="select * from users";
         con.query(q,function(err,result){
             if(err)
@@ -171,6 +190,8 @@ app.post("/Aloginprocess",ed,function(req,res){
 /*----------------------viewenquery---------------------*/
     app.get("/vienq",function(req,res)
     {
+if(req.session.aname==null)
+res.redirect("/admin");
         var q="select * from contact";
         con.query(q,function(err,result){
             if(err)
@@ -195,6 +216,8 @@ app.post("/Aloginprocess",ed,function(req,res){
     
 app.post("/addbookprocess",ed, upload.single('bookImage'),function(req,res)
 {
+if(req.session.aname==null)
+res.redirect("/admin");
 
     var a=req.body.bookId;
     var b=req.body.bookName;
@@ -212,6 +235,8 @@ app.post("/addbookprocess",ed, upload.single('bookImage'),function(req,res)
 
 app.get("/vbooks",function(req,res)
 {
+if(req.session.aname==null)
+res.redirect("/admin");
     var q="select * from book";
     con.query(q,function(err,result){
         if(err)
