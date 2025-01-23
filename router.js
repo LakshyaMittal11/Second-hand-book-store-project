@@ -233,6 +233,7 @@ res.redirect("/admin");
 });
 });
 
+/*-----------------View book---------------------------------*/
 app.get("/vbooks",function(req,res)
 {
 if(req.session.aname==null)
