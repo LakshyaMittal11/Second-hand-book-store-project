@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Page</title>
-    <link rel="stylesheet" href="/css/vienq.css">
+    <link rel="stylesheet" href="/css/viewusers.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -25,32 +25,33 @@
 
         <main class="main-content">
            <table border="1">
-<tr>
-<th>Name</th>
-<th>Email</th>
-<th>Phone</th>
-<th>Message</th>
-
-</tr>
-<% data.forEach((entry)=>
-{
-%>
-<tr>
-<td><%= entry.Name %></td>
-<td><%= entry.Email %></td>
-<td><%= entry.Phone %></td>
-<td><%= entry.Message %></td>
-
-</tr>
-<%});
-%>
+            <th>Phone Number</th>
+            <th>Address</th>
+            <th>Pin</th>
+            <th>Amount</th>
+            <th>Product Name</th>
+            <th>Product Orderdate</th>
+            <th>Delete</th>
+          <% data.forEach((entry)=>
+          {
+          %>
+          <tr>
+              <td><%=entry.PhoneNumber%></td>
+          <td><%= entry.Address %></td>
+          <td><%= entry.Pin %></td>
+          <td><%= entry.Amount %></td>
+          <td><%= entry.pname %></td>
+          <td><%=entry.orderdate %></td>
+          <td><a href="delorders?sno=<%= entry.sno%>">Delete</a></td>
+          </tr>
+          <%});%>
 </table>
 
 
         </main>
 
         <footer class="footer">
-            <p>Footer Content Here</p>
+            <p>Books Image Here</p>
         </footer>
     </div>
 </body>

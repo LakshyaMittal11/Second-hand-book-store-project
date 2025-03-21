@@ -17,7 +17,10 @@
                     <li><a href="vbooks">View Books</a></li>
                     <li><a href="vienq">Viewer Inquery</a></li>
                     <li><a href="viewusers">View Users</a></li>
-                    <li><a href="#">Admin Logout</a></li>
+                    <li><a href="avorders">View Orders</a></li>
+                    <li><a href="alogout">Admin Logout</a></li>
+
+
                 </ul>
             </nav>
         </header>
@@ -37,7 +40,7 @@
 <td><%= entry.name %></td>
 <td><%= entry.email %></td>
 <td><%= entry.pwd %></td>
-
+<td><a href="deleteuser?em=<%= entry.email%>">Delete</a></td>
 </tr>
 <%});
 %>

@@ -10,15 +10,17 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1>Welcome <%= aname%></h1>
+            <h1>Welcome <%= uname%></h1>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="addbook">Add Book</a></li>
-                    <li><a href="vbooks">View Books</a></li>
-                    <li><a href="vienq">Viewer Inquery</a></li>
-                    <li><a href="viewusers">View Users</a></li>
-                    <li><a href="avorders">View Orders</a></li>
-                    <li><a href="alogout">Admin Logout</a></li>
+                    <li><a href="index">Front Page</a></li>
+                    <li><a href="home">Home</a></li>
+                    <li><a href="About">About</a></li>
+                    <li><a href="books">Books</a></li>
+                    <li><a href="contact">Contact Us</a></li>
+                    <li><a href="Register">Registration</a></li>
+                   
+                    <li><a href="ulogout"> Logout</a></li>
                 </ul>
             </nav>
         </header>
@@ -26,27 +28,31 @@
         <main class="main-content">
            <table border="1">
 <tr>
+<th>Sno</th>
+<th>User Name</th>
+<th>User Email</th>
 <th>Book id</th>
 <th>Book name</th>
 <th>Price</th>
 <th>Category</th>
 <th>Description</th>
 <th>Book Image</th>
-<th>Delete</th>
 
 </tr>
 <% data.forEach((entry)=>
 {
 %>
 <tr>
+  <td><%=entry.sno%></td>
+  <td><%=entry.uname%></td>
+  <td><%=entry.uemail%></td>
     <td><%=entry.bookid%></td>
 <td><%= entry.bname %></td>
 <td><%= entry.price %></td>
 <td><%= entry.category %></td>
 <td><%= entry.description %></td>
 <td><img height="100" width="100" src="<%= entry.bimage %>"></td>
-<td><a href="deletebook?em=<%= entry.bookid%>">Delete</a></td>
-
+<td><a href="delcart?sno=<%= entry.sno%>">Delete</a></td>
 </tr>
 <%});
 %>
@@ -56,7 +62,7 @@
         </main>
 
         <footer class="footer">
-            <p>Books Image Here</p>
+            <li><a href="orders">Order Now</a></li>
         </footer>
     </div>
 </body>
