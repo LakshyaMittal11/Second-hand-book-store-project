@@ -1,0 +1,169 @@
+/* Global Styles */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #337ab7;
+  }
+  
+  a:hover {
+    color: #23527c;
+  }
+  
+  /* Header Styles */
+  
+  .navbar {
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  
+  .navbar-nav {
+    margin-right: 1rem;
+  }
+  
+  .nav-item {
+    margin-right: 1rem;
+  }
+  
+  .nav-link {
+    color: #333;
+  }
+  
+  .nav-link:hover {
+    color: #337ab7;
+  }
+  
+  /* Main Content Styles */
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .col-md-12 {
+    flex-basis: 100%;
+  }
+  
+  h1 {
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f9f9f9;
+  }
+  
+  td img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  /* Footer Styles */
+  
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    clear: both;
+  }
+  
+  footer p {
+    margin-bottom: 0;
+  }
+  
+  /* Responsive Design */
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+  
+    .row {
+      flex-direction: column;
+    }
+  
+    .col-md-12 {
+      flex-basis: 100%;
+    }
+  
+    table {
+      font-size: 0.8rem;
+    }
+  
+    th, td {
+      padding: 0.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container {
+      padding: 0.5rem;
+    }
+  
+    .row {
+      flex-direction: column;
+    }
+  
+    .col-md-12 {
+      flex-basis: 100%;
+    }
+  
+    table {
+      font-size: 0.6rem;
+    }
+  
+    th, td {
+      padding: 0.2rem;
+    }
+  }
