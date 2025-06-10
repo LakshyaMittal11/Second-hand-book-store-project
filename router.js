@@ -412,7 +412,7 @@ var p=0;
 var bn="";
 for(i=0;i<result.length;i++)
 {
-    p=p+result[i].price;
+    p=p+Number(result[i].price);
     bn=bn+","+result[i].bname;
 
 }
